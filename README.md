@@ -49,6 +49,7 @@ Es un software diseñado para gestionar de forma eficiente el tiempo de uso y lo
 
 ## Plan de proyecto 
 ### Diagrama de Gantt
-![Captura de pantalla 2025-04-22 081115](https://github.com/user-attachments/assets/753d5341-485c-4547-99b9-d08954afcc7a)
+![Captura de pantalla 2025-04-22 092317](https://github.com/user-attachments/assets/169434cb-02fb-483d-9a72-6b8c6a2f48b9)
+
 ### Presupuesto del proyecto
 El presupuesto se basará en el tiempo de práctica de las tres integrantes. Si se considera que el valor de un SMLV en Colombia es aproximadamente $1.423.500 COP. Para un total de 50 horas de trabajo.
