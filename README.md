@@ -46,3 +46,6 @@ Es un software diseñado para gestionar de forma eficiente el tiempo de uso y lo
 - El sistema es compatible con los sistemas operativos estadísticamente más usados.
 - El sistema debe asegurar la seguridad de los datos, que sean claros, concisos y no se pierdan.
 
+## Plan de proyecto 
+### Diagrama de Gantt
+![Captura de pantalla 2025-04-22 081115](https://github.com/user-attachments/assets/753d5341-485c-4547-99b9-d08954afcc7a)
