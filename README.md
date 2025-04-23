@@ -58,7 +58,7 @@ Horas semanales de las tres integrantes: $2 \times 3 = 6$ horas semanales
 
 Duración total de semanas: $\frac{50}{6 horas semanales} = 8.3 semanas$
 
-total horas semanales: $6 horas semanales \times 8.3 semanas = 48 horas semanales$
+total horas semanales: $6 horas semanales \times 8 semanas = 48 horas semanales$
 
 total horas al mes: $48 horas semanales \times 4 semanas = 192 horas al mes$
 
