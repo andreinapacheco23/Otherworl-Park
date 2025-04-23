@@ -52,7 +52,7 @@ Es un software diseñado para gestionar de forma eficiente el tiempo de uso y lo
 ![Captura de pantalla 2025-04-22 092317](https://github.com/user-attachments/assets/169434cb-02fb-483d-9a72-6b8c6a2f48b9)
 
 ### Presupuesto del proyecto
-El presupuesto se basará en el tiempo de práctica de las tres integrantes. Cada integrante le dedicará 2 horas semanales al proyecto. Si se considera que el valor de un SMMLV en Colombia es aproximadamente $1.423.500 COP. Para un total de 50 horas de trabajo, resulta lo siguiente: 
+El presupuesto se basará en el tiempo de práctica de las tres integrantes. Cada integrante le dedicará 2 horas semanales al proyecto. Si se considera que el valor de un SMMLV en Colombia es aproximadamente $1.423.500 COP, para un total de 50 horas de trabajo. El valor económico del tiempo invertido por las integrantes resulta de la siguente manera: 
 
 Horas semanales de las tres integrantes: $2 \times 3 = 6$ horas semanales
 
