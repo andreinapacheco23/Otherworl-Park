@@ -58,7 +58,7 @@ Horas semanales de las tres integrantes: $2 \times 3 = 6$ horas semanales
 
 Duración total de semanas: $\frac{50}{6 horas semanales} = 8.3 semanas$
 
-Valor hora de práctica: 1.423.500/192 horas al mes= 7,414.06 COP/hora
+Valor hora de práctica: $\frac{1.423.500}{192 horas al mes} = 7,414.06 COP/hora$  
 
 Costo total del proyecto: $50 horas \times 7,414.06 COP/hora = 370.703 COP$ 
 
