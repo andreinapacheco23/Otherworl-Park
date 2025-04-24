@@ -25,7 +25,7 @@ El proyecto consiste en crear un programa de consola visualmente amigable para e
 <img src="https://github.com/user-attachments/assets/791b0c1c-e445-42d1-b61b-38ba50e7f871" alt="Imagen del Proyecto" width="300"/>
 
 ## Licencia del software
-¡<p xmlns:cc="http://creativecommons.org/ns#" >Este trabajo está licenciado bajo <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!¡importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!¡importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.¿org/presskit/icons/nc.svg?¡ref=chooser-v1" alt=""><img style="height:22px!importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
+<p xmlns:cc="http://creativecommons.org/ns#" >Este trabajo está licenciado bajo <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!¡importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!¡importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.¿org/presskit/icons/nc.svg?¡ref=chooser-v1" alt=""><img style="height:22px!importante;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
 
 ## Reporte de visión
 Es un software diseñado para gestionar de forma eficiente el tiempo de uso y los pagos en un parqueadero. Permite registrar la entrada y salida de vehículos, calcular automáticamente el costo según el tiempo de permanencia, generar reportes de ingresos, y llevar un control en tiempo real de los espacios disponibles.
@@ -49,7 +49,8 @@ Es un software diseñado para gestionar de forma eficiente el tiempo de uso y lo
 
 ## Plan de proyecto 
 ### Diagrama de Gantt
-![Captura de pantalla 2025-04-22 092317](https://github.com/user-attachments/assets/169434cb-02fb-483d-9a72-6b8c6a2f48b9)
+![Gantt Chart Roadmap Whiteboard in Blue Purple Pink Sleek Digitalism Style (1)](https://github.com/user-attachments/assets/85c9a8e1-c3c2-4642-87c9-4920d6604327)
+
 
 ### Presupuesto del proyecto
 El presupuesto se basará en el tiempo de práctica de las tres integrantes. Cada integrante le dedicará 2 horas semanales al proyecto. Si se considera que el valor de un SMMLV en Colombia es aproximadamente $1.423.500 COP, para un total de 50 horas de trabajo. El valor económico del tiempo invertido por las integrantes resulta de la siguente manera: 
