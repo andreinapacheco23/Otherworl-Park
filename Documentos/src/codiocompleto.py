@@ -25,7 +25,7 @@ def mostrar_encabezado():
     
     
 def validar_nombre(nombre):
-    #Valida que el nombre tenga al menos 3 letras 
+    # este  valida que el nombre tenga al menos 3 letras 
     if len(nombre) < 3:
         return False, "El nombre debe tener al menos 3 letras."
     
@@ -127,16 +127,10 @@ def solicitar_datos_con_validacion(campo, funcion_validacion):
 def registrar_tripulante():
     print("\n Registro de nuevo tripulante🧑‍🚀")
     
-    # Solicita y valida nombre
-    nombre = solicitar_datos_con_validacion("Nombre del tripulante", validar_nombre)
-    
-    # Solicita y valida apellido
-    apellido = solicitar_datos_con_validacion("Apellido del tripulante", validar_apellido)
-    
-    # Solicita y valida documento
-    documento = solicitar_datos_con_validacion("Documento del tripulante", validar_documento)
-    
-    # Solicita y valida placa
+    # Solicita y valida cada uno de los datosss
+    nombre = solicitar_datos_con_validacion("Nombre del tripulante", validar_nombre)    
+    apellido = solicitar_datos_con_validacion("Apellido del tripulante", validar_apellido) 
+    documento = solicitar_datos_con_validacion("Documento del tripulante", validar_documento) 
     placa = solicitar_datos_con_validacion("Matrícula de la nave (placa)", validar_placa)
 
     if placa in usuarios:
@@ -176,7 +170,7 @@ def retirar_nave():
     hora_salida = datetime.datetime.now()
     hora_entrada = naves_en_hangar.pop(placa)
     
-    # Calcula cobro detallado
+    # Csalcula cobro detallado
     cobro = calcular_cobro(hora_entrada, hora_salida)
     tripulante = usuarios[placa]
     
