@@ -1,4 +1,4 @@
-# 📈 Plan de Versionado - Otherworld Park
+#  Plan de Versionado - Otherworld Park
 
 A continuación, se describen los avances del proyecto desde su inicio hasta la entrega final, indicando las versiones desarrolladas y los cambios realizados en cada una:
 
