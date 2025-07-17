@@ -174,15 +174,21 @@ def retirar_nave():
     cobro = calcular_cobro(hora_entrada, hora_salida)
     tripulante = usuarios[placa]
     
-    historial_naves_retiradas = []
-    total_recaudado = 0
-    tiempo_total_estancia = 0
-    cantidad_naves_retiradas = 0
+    global historial_naves_retiradas, total_recaudado, tiempo_total_estancia, cantidad_naves_retiradas
+
+    historial_naves_retiradas.append({ 'placa': placa, 'tripulante': tripulante,
+    'tiempo_minutos': cobro['minutos_totales'], 'cobro': cobro['total']})
+
+    total_recaudado += cobro['total']
+    tiempo_total_estancia += cobro['minutos_totales']
+    cantidad_naves_retiradas += 1
     
     print("\n🧾 Recibo de misión completada")
     print(f"Tripulante: {tripulante['nombre']} {tripulante['apellido']}")
     print(f"Documento: {tripulante['documento']}")
     print(f"Nave: {placa}")
+    print(f"Hora de entrada: {hora_entrada.strftime('%H:%M')}")
+    print(f"Hora de salida: {hora_salida.strftime('%H:%M')}")
     print(f"Tiempo total: {cobro['minutos_totales']} minutos")
     print(f"Horas completas: {cobro['horas_completas']} horas")
     print(f"Cuartos de hora: {cobro['cuartos_hora']} cuartos")
@@ -218,103 +224,92 @@ def menu_administrador():
         print("Acceso autorizado✅ ")
         while True:
             print("\n===  Panel de Administración  ===")
-            print("1. Total de vehículos registrados")
-            print("2. Total de vehículos retirados")
-            print("3. Total de vehículos sin retirar")
-            print("4. Total pago de vehículos retirados")
-            print("5. Tiempo promedio de estancia")
-            print("6. Lista de usuarios")
-            print("7. Vehículo con tiempo máximo y mínimo")
-            print("8. Volver al menú principal")
+            print("1. Usuarios registrados y sus naves")
+            print("2. Estado de naves (retiradas y sin retirar)")
+            print("3. Reporte financiero")
+            print("4. Análisis de tiempos (promedio, máximo y mínimo)")
+            print("5. Volver al menú principal")
             
             opcion = input("\nSeleccione una opción: ")
             
             if opcion == "1":
-                reporte_vehiculos_registrados()
+                reporte_usuarios_y_naves()
             elif opcion == "2":
-                reporte_vehiculos_retirados()
+                reporte_estado_naves()
             elif opcion == "3":
-                reporte_vehiculos_sin_retirar()
+                reporte_financiero()
             elif opcion == "4":
-                reporte_total_pagos()
+                reporte_analisis_tiempos()
             elif opcion == "5":
-                reporte_tiempo_promedio()
-            elif opcion == "6":
-                reporte_lista_usuarios()
-            elif opcion == "7":
-                reporte_tiempo_maximo_minimo()
-            elif opcion == "8":
                 break
             else:
                 print("❌ Opción no válida❌. Intente de nuevo.")
     else:
-        print("❌ Credenciales incorrectas❌.")        
-        
-def reporte_vehiculos_registrados():
-    print("\n Reporte📋: Total de vehículos registrados")
+        print("❌ Credenciales incorrectas❌.")
+
+def reporte_usuarios_y_naves():
+    print("\n Reporte📋: Usuarios registrados y sus naves")
     total = len(usuarios)
-    print(f"Total de naves registradas: {total}")
+    print(f"Total de usuarios registrados: {total}")
+    
+    if usuarios:
+        print("\nLista completa de usuarios y sus naves:")
+        for placa, datos in usuarios.items():
+            print(f"- {datos['nombre']} {datos['apellido']} (Doc: {datos['documento']}) - Nave: {placa}")
+    else:
+        print("No hay usuarios registrados.")
     print("-" * 40)
 
-def reporte_vehiculos_retirados():
-    print("\n Reporte📋: Total de vehículos retirados")
-    total = len(historial_naves_retiradas)
-    print(f"Total de naves retiradas: {total}")
-    if historial_naves_retiradas:
-        print("\nHistorial de naves retiradas:")
-        for registro in historial_naves_retiradas:
-            print(f"- {registro['placa']} | {registro['tripulante']['nombre']} {registro['tripulante']['apellido']} | ${registro['cobro']}")
-    print("-" * 40)
-
-def reporte_vehiculos_sin_retirar():
-    print("\n Reporte📋: Total de naves sin retirar")
-    total = len(naves_en_hangar)
-    print(f"Total de naves sin retirar (en hangar): {total}")
+def reporte_estado_naves():
+    print("\n Reporte📋: Estado de naves")
+    total_retiradas = len(historial_naves_retiradas)
+    total_sin_retirar = len(naves_en_hangar)
+    
+    print(f"Total de naves retiradas: {total_retiradas}")
+    print(f"Total de naves sin retirar: {total_sin_retirar}")
+    
     if naves_en_hangar:
-        print("\nNaves actualmente en el hangar:")
+        print("\nNaves sin retirar (actualmente en hangar):")
         for placa, hora_entrada in naves_en_hangar.items():
             tripulante = usuarios[placa]
             tiempo_transcurrido = datetime.datetime.now() - hora_entrada
             minutos = int(tiempo_transcurrido.total_seconds() / 60)
             print(f"- {placa} | {tripulante['nombre']} {tripulante['apellido']} | {minutos} minutos")
+    else:
+        print("No hay naves en el hangar actualmente.")
     print("-" * 40)
 
-def reporte_total_pagos():
-    print("\n Reporte📋: Total pago de naves retiradas")
+def reporte_financiero():
+    print("\n Reporte📋: Reporte financiero")
     print(f"Total recaudado: ${total_recaudado}")
     print(f"Cantidad de naves retiradas: {cantidad_naves_retiradas}")
+    
     if cantidad_naves_retiradas > 0:
-        promedio = total_recaudado / cantidad_naves_retiradas
-        print(f"Pago promedio por nave: ${promedio:.2f}")
+        promedio_pago = total_recaudado / cantidad_naves_retiradas
+        print(f"Pago promedio por nave: ${promedio_pago:.2f}")
+        
+        print("\nDetalle de pagos por nave retirada:")
+        for registro in historial_naves_retiradas:
+            print(f"- {registro['placa']} | {registro['tripulante']['nombre']} {registro['tripulante']['apellido']} | ${registro['cobro']}")
+    else:
+        print("No hay datos financieros disponibles.")
     print("-" * 40)
 
-def reporte_tiempo_promedio():
-    print("\n Reporte📋: Tiempo promedio de estancia")
+def reporte_analisis_tiempos():
+    print("\n Reporte📋: Análisis de tiempos")
+    
+    # Tiempo promedio
     if cantidad_naves_retiradas > 0:
         promedio_minutos = tiempo_total_estancia / cantidad_naves_retiradas
         horas = int(promedio_minutos // 60)
         minutos = int(promedio_minutos % 60)
-        print(f"Tiempo promedio de estancia: {horas} horas y {minutos} minutos")
+        print(f"Tiempo promedio de estancia por vehículo: {horas} horas y {minutos} minutos")
         print(f"Total de minutos promedio: {promedio_minutos:.2f}")
     else:
-        print("No hay datos suficientes para calcular el promedio.")
-    print("-" * 40)
-
-def reporte_lista_usuarios():
-    print("\n Reporte📋: Lista de usuarios")
-    if usuarios:
-        print("Lista completa de tripulantes registrados:")
-        for placa, datos in usuarios.items():
-            estado = "En hangar" if placa in naves_en_hangar else "Fuera del hangar"
-            print(f"- {placa} | {datos['nombre']} {datos['apellido']} | Doc: {datos['documento']} | {estado}")
-    else:
-        print("No hay usuarios registrados.")
-    print("-" * 40)
-
-def reporte_tiempo_maximo_minimo():
-    print("\n Reporte📋: Nave con tiempo máximo y mínimo")
+        print("No hay datos suficientes para calcular el tiempo promedio.")
+    
+    # Tiempo máximo y mínimo
     if historial_naves_retiradas:
-        # Encontrando tiempo máximo y mínimo 
         max_tiempo = historial_naves_retiradas[0]
         min_tiempo = historial_naves_retiradas[0]
 
@@ -324,7 +319,7 @@ def reporte_tiempo_maximo_minimo():
             if registro['tiempo_minutos'] < min_tiempo['tiempo_minutos']:
                 min_tiempo = registro
         
-        print(" Nave con MAYOR tiempo de estancia:")
+        print("\n Nave con MAYOR tiempo de estancia:")
         print(f"  Placa: {max_tiempo['placa']}")
         print(f"  Tripulante: {max_tiempo['tripulante']['nombre']} {max_tiempo['tripulante']['apellido']}")
         print(f"  Tiempo: {max_tiempo['tiempo_minutos']} minutos")
@@ -336,8 +331,8 @@ def reporte_tiempo_maximo_minimo():
         print(f"  Tiempo: {min_tiempo['tiempo_minutos']} minutos")
         print(f"  Cobro: ${min_tiempo['cobro']}")
     else:
-        print("No hay datos suficientes para mostrar este reporte.")
-    print("-" * 40)          
+        print("No hay datos suficientes para mostrar análisis de tiempos máximo y mínimo.")
+    print("-" * 40)
         
 
 def menu():
@@ -346,9 +341,8 @@ def menu():
         print("\n1. Registrar tripulante")
         print("2. Ingresar nave")
         print("3. Retirar nave")
-        print("4. Ver reporte del hangar")
-        print("5. Panel de Administración")
-        print("6. Salir")
+        print("4. Administrador")
+        print("5. Salir")
 
         opcion = input("\nSeleccione una opción: ")
 
@@ -359,10 +353,8 @@ def menu():
         elif opcion == "3":
             retirar_nave()
         elif opcion == "4":
-            ver_reporte()
-        elif opcion == "5":
             menu_administrador()
-        elif opcion == "6":
+        elif opcion == "5":
             print("\n Hasta la próxima misión, comandante👌.")
             break
         else:
