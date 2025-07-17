@@ -19,8 +19,7 @@ def mostrar_encabezado():
     print("\n=== 🚀 Bienvenido al estacionamiento Otherworld Park 🪐 ===")
     print("     Control central de ingreso de naves espaciales")
     print("==============================================================")
-    
-    
+        
 def validar_nombre(nombre):
     if len(nombre) < 3:
         return False, "El nombre debe tener al menos 3 letras."
@@ -29,7 +28,6 @@ def validar_nombre(nombre):
         if caracter.isdigit():
             return False, "El nombre no puede contener números."
     
-    # para veerificar que solo tenga letras y espacios
     for caracter in nombre:
         if not caracter.isalpha() and caracter != " ":
             return False, "El nombre solo puede contener letras."
@@ -56,16 +54,13 @@ def validar_documento(documento):
     return True, ""
 
 def validar_placa(placa):
-    #Valida que la placa tenga exactamente 6 caracteres 3 letras seguidas de 3 números
     if len(placa) != 6:
         return False, "La placa debe tener exactamente 6 caracteres."
     
-    # Verifica que los primeros 3 caracteres sean letras
     for i in range(3):
         if not placa[i].isalpha():
             return False, "Los primeros 3 caracteres deben ser letras."
-    
-    # Verifica que los últimos 3 caracteres sean números
+
     for i in range(3, 6):
         if not placa[i].isdigit():
             return False, "Los últimos 3 caracteres deben ser números."
@@ -73,25 +68,20 @@ def validar_placa(placa):
     return True, ""
 
 def calcular_cobro(hora_entrada, hora_salida):
-    #Calcula el cobro por tiempo de parqueo
     tiempo = hora_salida - hora_entrada
     minutos_totales = tiempo.total_seconds() / 60
-    
-    # Calcula horas completas
+
     horas_completas = int(minutos_totales // 60)
     minutos_restantes = int(minutos_totales % 60)
     
-    # Calcula cuartos de hora (cada 15 minutos)
     cuartos_hora = 0
     if minutos_restantes > 0:
         cuartos_hora = int((minutos_restantes - 1) // 15) + 1
     
-    # Calcula cobros
     cobro_horas = horas_completas * TARIFA_POR_HORA
     cobro_cuartos = cuartos_hora * TARIFA_POR_CUARTO_HORA
     total = cobro_horas + cobro_cuartos
     
-    # Aplica el pago minimo
     if total < TARIFA_POR_HORA:
         total = TARIFA_POR_HORA
     
@@ -100,7 +90,6 @@ def calcular_cobro(hora_entrada, hora_salida):
 
 
 def solicitar_datos_con_validacion(campo, funcion_validacion):
-    #Solicita un dato y lo valida hasta que sea correcto
     while True:
         dato = input(f"{campo}: ").strip()
         if campo == "Matrícula de la nave (placa)":
@@ -112,11 +101,8 @@ def solicitar_datos_con_validacion(campo, funcion_validacion):
         else:
             print(f"⚠️ {mensaje}⚠️")
 
-
 def registrar_tripulante():
     print("\n Registro de nuevo tripulante🧑‍🚀")
-    
-    # Solicita y valida cada uno de los datosss
     nombre = solicitar_datos_con_validacion("Nombre del tripulante", validar_nombre)    
     apellido = solicitar_datos_con_validacion("Apellido del tripulante", validar_apellido) 
     documento = solicitar_datos_con_validacion("Documento del tripulante", validar_documento) 
@@ -159,7 +145,6 @@ def retirar_nave():
     hora_salida = datetime.datetime.now()
     hora_entrada = naves_en_hangar.pop(placa)
     
-    # Csalcula cobro detallado
     cobro = calcular_cobro(hora_entrada, hora_salida)
     tripulante = usuarios[placa]
     
@@ -202,8 +187,7 @@ def ver_reporte():
                   f"desde las {hora.strftime('%H:%M')}")
     else:
         print("No hay naves acopladas actualmente.")
-        
-        
+           
 def menu_administrador():
     print("\n Acceso al sistema de administración")
     usuario = input("Usuario: ")
@@ -290,7 +274,6 @@ def reporte_financiero():
 def reporte_analisis_tiempos():
     print("\n Reporte📋: Análisis de tiempos")
     
-
     if cantidad_naves_retiradas > 0:
         promedio_minutos = tiempo_total_estancia / cantidad_naves_retiradas
         horas = int(promedio_minutos // 60)
@@ -326,10 +309,8 @@ def reporte_analisis_tiempos():
     print("-" * 40)
         
 def exportar_resultados_csv():
-    """Exporta los diccionarios principales a archivos CSV"""
     print("\n Exportando diccionarios a CSV...")
     
-   
     if usuarios:
         datos_usuarios = []
         for placa, datos in usuarios.items():
@@ -342,15 +323,13 @@ def exportar_resultados_csv():
         df_usuarios = pd.DataFrame(datos_usuarios)
         df_usuarios.to_csv('usuarios.csv', index=False)
         print("usuarios.csv creado✅ ")
-    
    
     if naves_en_hangar:
         datos_naves = []
         for placa, hora_entrada in naves_en_hangar.items():
             datos_naves.append({
                 'Placa': placa,
-                'Fecha_Hora_Entrada': hora_entrada.strftime('%Y-%m-%d %H:%M:%S')
-            })
+                'Fecha_Hora_Entrada': hora_entrada.strftime('%Y-%m-%d %H:%M:%S') })
         
         df_naves = pd.DataFrame(datos_naves)
         df_naves.to_csv('naves_en_hangar.csv', index=False)
@@ -372,7 +351,6 @@ def exportar_resultados_csv():
         print("historial_retiradas.csv creado✅ ")
     
     print(" Exportación completada.")
-
 
 def menu():
     while True:
@@ -398,6 +376,5 @@ def menu():
             break
         else:
             print("❌ Opción no válida❌. Intente de nuevo.")
-
 
 menu()
