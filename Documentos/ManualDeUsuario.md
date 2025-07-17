@@ -67,7 +67,7 @@ Sistema de parqueadero diseñado con temática espacial para interacción más a
 - Ver naves actualmente en el hangar.
 - Ver total recaudado por cobros.
 - Consultar tiempo promedio de estancia de las naves.
-- Exportar historial de naves retiradas a un archivo llamado `usuarios.csv`.
+- Exportar historial de naves retiradas en dos archivos llamados `usuarios.csv` y `historial_retiradas.csv`
   - El archivo se guarda en la misma carpeta donde se ejecuta el sistema.
 
 ---
