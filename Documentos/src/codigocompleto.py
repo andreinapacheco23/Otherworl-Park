@@ -1,11 +1,10 @@
 import datetime
+import pandas as pd
 
 NOMBRE_PARQUEADERO = "Otherworld Park"
 ESPACIOS_TOTALES = 64
 TARIFA_POR_HORA = 7000
 TARIFA_POR_CUARTO_HORA = 1500
-
-
 ADMIN_USUARIOS = { "admin": "admin123",  "comandante": "space2025", "supervisor": "hangar456"}
 
 usuarios = {}
@@ -16,8 +15,6 @@ total_recaudado = 0
 tiempo_total_estancia = 0
 cantidad_naves_retiradas = 0
 
-
-
 def mostrar_encabezado():
     print("\n=== 🚀 Bienvenido al estacionamiento Otherworld Park 🪐 ===")
     print("     Control central de ingreso de naves espaciales")
@@ -25,11 +22,9 @@ def mostrar_encabezado():
     
     
 def validar_nombre(nombre):
-    # este  valida que el nombre tenga al menos 3 letras 
     if len(nombre) < 3:
         return False, "El nombre debe tener al menos 3 letras."
     
-    # para verificar que no tenga números
     for caracter in nombre:
         if caracter.isdigit():
             return False, "El nombre no puede contener números."
@@ -42,16 +37,11 @@ def validar_nombre(nombre):
     return True, ""
 
 def validar_apellido(apellido):
-   #Valida que el apellido tenga al menos 3 letras
     if len(apellido) < 3:
         return False, "El apellido debe tener al menos 3 letras."
-    
-    # Verificar que no tenga números
     for caracter in apellido:
         if caracter.isdigit():
             return False, "El apellido no puede contener números."
-    
-    # Verifica que solo tenga letras y espacios
     for caracter in apellido:
         if not caracter.isalpha() and caracter != " ":
             return False, "El apellido solo puede contener letras."
@@ -59,7 +49,6 @@ def validar_apellido(apellido):
     return True, ""   
 
 def validar_documento(documento):
-    # esta valida que el documento tenga entre 3 y 15 dígitos y solo contenga números
     if not documento.isdigit():
         return False, "El documento solo puede contener números."
     if len(documento) < 3 or len(documento) > 15:
@@ -183,7 +172,7 @@ def retirar_nave():
     tiempo_total_estancia += cobro['minutos_totales']
     cantidad_naves_retiradas += 1
     
-    print("\n🧾 Recibo de misión completada")
+    print("\n Recibo de misión completada🧾")
     print(f"Tripulante: {tripulante['nombre']} {tripulante['apellido']}")
     print(f"Documento: {tripulante['documento']}")
     print(f"Nave: {placa}")
@@ -228,7 +217,8 @@ def menu_administrador():
             print("2. Estado de naves (retiradas y sin retirar)")
             print("3. Reporte financiero")
             print("4. Análisis de tiempos (promedio, máximo y mínimo)")
-            print("5. Volver al menú principal")
+            print("5. Exportar resultados a CSV") 
+            print("6. Volver al menú principal")  
             
             opcion = input("\nSeleccione una opción: ")
             
@@ -241,6 +231,8 @@ def menu_administrador():
             elif opcion == "4":
                 reporte_analisis_tiempos()
             elif opcion == "5":
+                exportar_resultados_csv()  
+            elif opcion == "6":           
                 break
             else:
                 print("❌ Opción no válida❌. Intente de nuevo.")
@@ -298,7 +290,7 @@ def reporte_financiero():
 def reporte_analisis_tiempos():
     print("\n Reporte📋: Análisis de tiempos")
     
-    # Tiempo promedio
+
     if cantidad_naves_retiradas > 0:
         promedio_minutos = tiempo_total_estancia / cantidad_naves_retiradas
         horas = int(promedio_minutos // 60)
@@ -308,7 +300,6 @@ def reporte_analisis_tiempos():
     else:
         print("No hay datos suficientes para calcular el tiempo promedio.")
     
-    # Tiempo máximo y mínimo
     if historial_naves_retiradas:
         max_tiempo = historial_naves_retiradas[0]
         min_tiempo = historial_naves_retiradas[0]
@@ -334,6 +325,54 @@ def reporte_analisis_tiempos():
         print("No hay datos suficientes para mostrar análisis de tiempos máximo y mínimo.")
     print("-" * 40)
         
+def exportar_resultados_csv():
+    """Exporta los diccionarios principales a archivos CSV"""
+    print("\n Exportando diccionarios a CSV...")
+    
+   
+    if usuarios:
+        datos_usuarios = []
+        for placa, datos in usuarios.items():
+            datos_usuarios.append({
+                'Placa': placa,
+                'Nombre': datos['nombre'],
+                'Apellido': datos['apellido'],
+                'Documento': datos['documento'] })
+        
+        df_usuarios = pd.DataFrame(datos_usuarios)
+        df_usuarios.to_csv('usuarios.csv', index=False)
+        print("usuarios.csv creado✅ ")
+    
+   
+    if naves_en_hangar:
+        datos_naves = []
+        for placa, hora_entrada in naves_en_hangar.items():
+            datos_naves.append({
+                'Placa': placa,
+                'Fecha_Hora_Entrada': hora_entrada.strftime('%Y-%m-%d %H:%M:%S')
+            })
+        
+        df_naves = pd.DataFrame(datos_naves)
+        df_naves.to_csv('naves_en_hangar.csv', index=False)
+        print("naves_en_hangar.csv creado✅ ")
+    
+    if historial_naves_retiradas:
+        datos_historial = []
+        for registro in historial_naves_retiradas:
+            datos_historial.append({
+                'Placa': registro['placa'],
+                'Nombre': registro['tripulante']['nombre'],
+                'Apellido': registro['tripulante']['apellido'],
+                'Documento': registro['tripulante']['documento'],
+                'Tiempo_Minutos': registro['tiempo_minutos'],
+                'Cobro': registro['cobro']})
+        
+        df_historial = pd.DataFrame(datos_historial)
+        df_historial.to_csv('historial_retiradas.csv', index=False)
+        print("historial_retiradas.csv creado✅ ")
+    
+    print(" Exportación completada.")
+
 
 def menu():
     while True:
@@ -360,5 +399,5 @@ def menu():
         else:
             print("❌ Opción no válida❌. Intente de nuevo.")
 
-# Ejecutar
+
 menu()
