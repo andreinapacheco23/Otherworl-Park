@@ -175,18 +175,9 @@ def retirar_nave():
         print("(Se aplicó pago mínimo de una hora)")
 
 
-def ver_reporte():
-    print("\n Reporte del Hangar Espacial")
-    print(f"Espacios disponibles: {ESPACIOS_TOTALES - len(naves_en_hangar)}")
-    print(f"Naves en el hangar: {len(naves_en_hangar)}")
-    if naves_en_hangar:
-        print("Naves acopladas:")
-        for placa, hora in naves_en_hangar.items():
-            tripulante = usuarios[placa]
-            print(f"- {placa} ({tripulante['nombre']} {tripulante['apellido']}), " +
-                  f"desde las {hora.strftime('%H:%M')}")
-    else:
-        print("No hay naves acopladas actualmente.")
+def ver_espacios_disponibles():
+    print(f"\n Espacios disponibles en el hangar: {ESPACIOS_TOTALES - len(naves_en_hangar)} de {ESPACIOS_TOTALES}")
+
            
 def menu_administrador():
     print("\n Acceso al sistema de administración")
@@ -358,8 +349,9 @@ def menu():
         print("\n1. Registrar tripulante")
         print("2. Ingresar nave")
         print("3. Retirar nave")
-        print("4. Administrador")
-        print("5. Salir")
+        print("4. Ver espacios disponibles")
+        print("5. Administrador")
+        print("6. Salir")
 
         opcion = input("\nSeleccione una opción: ")
 
@@ -370,8 +362,10 @@ def menu():
         elif opcion == "3":
             retirar_nave()
         elif opcion == "4":
-            menu_administrador()
+            ver_espacios_disponibles()
         elif opcion == "5":
+            menu_administrador()
+        elif opcion == "6":
             print("\n Hasta la próxima misión, comandante👌.")
             break
         else:
