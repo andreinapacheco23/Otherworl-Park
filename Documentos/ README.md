@@ -9,7 +9,7 @@
 
 ### Andreina Pacheco Rodriguez
 - **Programa académico**: Ingeniería industrial
-- **Habilidades**: Programación básica, Análisis de datos, Asertividad
+- **Habilidades**: Programación básica, Análisis, Asertividad
 - **Fortalezas**: Resolución de conflictos, Adaptabilidad, Organización y planificación
 
 ### Cristina Isabel Tafur Campillo
